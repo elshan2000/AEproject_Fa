@@ -1,0 +1,80 @@
+// Prisma schema for the flower shop.
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// A product grouping, e.g. "Bouquets", "Roses", "Wedding".
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  products  Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@map("categories")
+}
+
+/// A single flower arrangement for sale.
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String   @db.Text
+  // Money is stored as Decimal(10,2) — never as Float — to avoid rounding errors.
+  price       Decimal  @db.Decimal(10, 2)
+  imageUrl    String
+  stock       Int      @default(0)
+  featured    Boolean  @default(false)
+
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  inquiries   Inquiry[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Composite/secondary indexes tuned for the storefront's real queries:
+  @@index([slug])
+  @@index([categoryId])
+  @@index([featured])
+  @@index([createdAt])
+  @@map("products")
+}
+
+/// A customer enquiry, optionally tied to the product they were viewing.
+model Inquiry {
+  id           String   @id @default(cuid())
+  customerName String
+  phone        String
+  message      String   @db.Text
+
+  // Optional: a contact-page message may not reference a product.
+  productId    String?
+  product      Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+
+  createdAt    DateTime @default(now())
+
+  @@index([productId])
+  @@index([createdAt])
+  @@map("inquiries")
+}
+
+/// Back-office user who can manage the catalogue.
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+
+  @@map("admins")
+}

@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Luxury florist theme — warm white background, muted rose primary, soft
+ * blush accents. All colors are HSL tokens so shadcn/ui components inherit them.
+ */
+@layer base {
+  :root {
+    --background: 30 33% 99%; /* warm white */
+    --foreground: 340 10% 15%; /* warm near-black */
+
+    --card: 0 0% 100%;
+    --card-foreground: 340 10% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 10% 15%;
+
+    --primary: 345 45% 47%; /* muted rose */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 345 30% 96%; /* soft blush */
+    --secondary-foreground: 345 35% 30%;
+
+    --muted: 30 15% 95%; /* warm grey */
+    --muted-foreground: 340 6% 45%;
+
+    --accent: 345 38% 94%; /* blush accent */
+    --accent-foreground: 345 35% 28%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 12% 90%;
+    --input: 30 12% 88%;
+    --ring: 345 45% 47%;
+
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+  }
+}
+
+/* Reusable utility helpers */
+@layer components {
+  .section {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+  /* Persian script must not have letter-spacing/uppercase (it disconnects
+     the joined letterforms), so the eyebrow uses weight + color only. */
+  .eyebrow {
+    @apply text-xs font-semibold text-primary;
+  }
+}
