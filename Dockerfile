@@ -8,8 +8,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY prisma/schema.prisma ./prisma/schema.prisma
 
-# Install all deps (postinstall runs prisma generate)
-RUN npm ci
+# Force official registry — overrides any .npmrc or inherited npm config
+RUN npm ci --registry https://registry.npmjs.org
 
 # ── Stage 2: build ────────────────────────────────────────────────────────────
 FROM node:20-alpine AS builder

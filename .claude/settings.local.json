@@ -66,7 +66,10 @@
       "Bash(node -e 'const {PrismaClient}=require\\('\\\\''@prisma/client'\\\\''\\);const p=new PrismaClient\\(\\);p.category.findFirst\\({where:{slug:'\\\\''wedding'\\\\''}}\\).then\\(r=>{console.log\\(r.id\\);p.$disconnect\\(\\)}\\);')",
       "Bash(curl -s -b /tmp/ck.txt -X POST http://localhost:3000/api/products -H 'Content-Type: application/json' -d '{\"name\":\"گل آزمایشی قیمت بالا\",\"description\":\"توضیحات تست برای محصول با قیمت بالا جهت بررسی اعتبارسنجی\",\"price\":2400000,\"stock\":5,\"imageUrl\":\"/uploads/test.png\",\"categoryId\":\"__TRACKED_VAR__\",\"featured\":false}')",
       "Bash(curl -s -b /tmp/ck.txt -X POST http://localhost:3000/api/admin/upload -F 'file=@/tmp/test.png;type=image/png')",
-      "Bash(grep -v \"^$\")"
+      "Bash(grep -v \"^$\")",
+      "Bash(npm config *)",
+      "Bash(curl -s --max-time 5 https://registry.npmjs.org/next/latest)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('version',''\\)\\)\")"
     ],
     "additionalDirectories": [
       "/home/elshan/AEporject/src/app/(shop)/products",
