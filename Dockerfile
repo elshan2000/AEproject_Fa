@@ -19,6 +19,13 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# env.ts validates at module-load time; provide dummy values so next build
+# can collect page data. Real secrets are injected at container runtime.
+ARG DATABASE_URL="postgresql://build:build@localhost:5432/build"
+ARG SESSION_SECRET="build-time-placeholder-not-used-in-production-xx"
+ENV DATABASE_URL=$DATABASE_URL
+ENV SESSION_SECRET=$SESSION_SECRET
+
 # Generate Prisma client, then build Next.js in standalone mode
 RUN npx prisma generate && npm run build
 
