@@ -9,7 +9,7 @@ import { siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "تماس با ما",
   description:
-    "برای سفارش گل، مشاوره یا هر پرسشی با خانهٔ گل در تماس باشید — تلفن، واتساپ و فرم تماس.",
+    "برای سفارش گل، مشاوره یا هر پرسشی با کایا در تماس باشید — تلفن، واتساپ و فرم تماس.",
 };
 
 type SearchParams = Promise<{ product?: string }>;

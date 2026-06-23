@@ -9,7 +9,7 @@ import type { SessionUser } from "@/types";
 
 export const SESSION_COOKIE = "fs_session";
 export const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 days (seconds)
-const ISSUER = "maison-fleur";
+const ISSUER = "kaya";
 
 function getSecret(): Uint8Array {
   const secret = process.env.SESSION_SECRET;

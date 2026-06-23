@@ -13,7 +13,7 @@ const vazirmatn = Vazirmatn({
   display: "swap",
 });
 
-const SITE_NAME = "خانهٔ گل";
+const SITE_NAME = "کایا";
 const SITE_DESCRIPTION =
   "دسته‌گل‌ها و آرایش‌های گل لوکس، با ظرافت دست‌چین و آماده می‌شوند. گل تازه برای هر مناسبت.";
 

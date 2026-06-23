@@ -6,7 +6,7 @@
 module.exports = {
   apps: [
     {
-      name: "flower-shop",
+      name: "kaya",
       script: ".next/standalone/server.js",
       instances: "max",          // one per CPU core
       exec_mode: "cluster",

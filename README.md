@@ -1,4 +1,4 @@
-# خانهٔ گل — Flower Shop
+# کایا — Kaya Flower Shop
 
 فروشگاه اینترنتی گل با Next.js 15، TypeScript، Tailwind CSS، PostgreSQL، و Prisma ORM.
 
@@ -27,8 +27,8 @@
 ### ۲. کلون و نصب
 
 ```bash
-git clone <repo-url> flower-shop
-cd flower-shop
+git clone <repo-url> kaya
+cd kaya
 npm install
 ```
 
@@ -64,7 +64,7 @@ npm run dev
 
 - فروشگاه: http://localhost:3000
 - پنل مدیریت: http://localhost:3000/admin
-  - ایمیل: `admin@flowershop.local`
+  - ایمیل: `admin@kaya.local`
   - رمز: `admin12345` — **حتماً در تولید تغییر دهید!**
 
 ---
@@ -148,12 +148,12 @@ chmod +x scripts/deploy.sh
 ### Nginx Reverse Proxy
 
 ```bash
-sudo cp nginx/flower-shop.conf /etc/nginx/sites-available/flower-shop
+sudo cp nginx/kaya.conf /etc/nginx/sites-available/kaya
 # آدرس دامنه را در فایل ویرایش کنید:
-sudo nano /etc/nginx/sites-available/flower-shop
+sudo nano /etc/nginx/sites-available/kaya
 # example.com را با دامنه واقعی جایگزین کنید
 
-sudo ln -s /etc/nginx/sites-available/flower-shop /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/kaya /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
 
 # SSL با Let's Encrypt
