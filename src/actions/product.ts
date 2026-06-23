@@ -29,21 +29,21 @@ function toFailure(err: unknown): { success: false; error: string; fieldErrors?:
   if (err instanceof ZodError) {
     return {
       success: false,
-      error: "Please fix the highlighted fields.",
+      error: "خطا در اعتبارسنجی فیلدها را بررسی کنید.",
       fieldErrors: err.flatten().fieldErrors,
     };
   }
   if (err instanceof UnauthorizedError) {
-    return { success: false, error: "You must be signed in as an admin." };
+    return { success: false, error: "برای ادامه باید وارد شوید." };
   }
   if (err instanceof DuplicateSlugError) {
     return { success: false, error: err.message };
   }
   if (err instanceof ProductNotFoundError) {
-    return { success: false, error: "Product not found." };
+    return { success: false, error: "محصول یافت نشد." };
   }
   console.error("Product action error:", err);
-  return { success: false, error: "Something went wrong. Please try again." };
+  return { success: false, error: "خطایی رخ داد. لطفاً دوباره تلاش کنید." };
 }
 
 export async function createProductAction(

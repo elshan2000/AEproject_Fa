@@ -5,37 +5,37 @@ const productFields = {
   name: z
     .string()
     .trim()
-    .min(2, "Name must be at least 2 characters")
-    .max(120, "Name is too long"),
+    .min(2, "نام باید حداقل ۲ نویسه باشد")
+    .max(120, "نام خیلی طولانی است"),
   slug: z
     .string()
     .trim()
     .regex(
       /^[a-z0-9؀-ۿ]+(?:-[a-z0-9؀-ۿ]+)*$/,
-      "Slug must be lowercase letters/numbers separated by dashes"
+      "اسلاگ باید با حروف/ارقام و خط‌تیره باشد"
     )
     .max(140)
     .optional(),
   description: z
     .string()
     .trim()
-    .min(10, "Description must be at least 10 characters")
+    .min(10, "توضیحات باید حداقل ۱۰ نویسه باشد")
     .max(5000),
   price: z.coerce
-    .number({ invalid_type_error: "Price must be a number" })
-    .positive("Price must be greater than 0")
-    .max(1_000_000, "Price is unrealistically high"),
+    .number({ invalid_type_error: "قیمت باید عدد باشد" })
+    .positive("قیمت باید بزرگتر از صفر باشد")
+    .max(100_000_000, "قیمت وارد شده غیرواقعی است"),
   imageUrl: z
     .string()
     .trim()
-    .min(1, "An image is required")
+    .min(1, "تصویر محصول الزامی است")
     .max(2048),
   stock: z.coerce
-    .number({ invalid_type_error: "Stock must be a number" })
-    .int("Stock must be a whole number")
-    .min(0, "Stock cannot be negative"),
+    .number({ invalid_type_error: "موجودی باید عدد باشد" })
+    .int("موجودی باید عددی صحیح باشد")
+    .min(0, "موجودی نمی‌تواند منفی باشد"),
   featured: z.coerce.boolean().default(false),
-  categoryId: z.string().trim().min(1, "Please choose a category"),
+  categoryId: z.string().trim().min(1, "انتخاب دسته‌بندی الزامی است"),
 };
 
 /** Validates the body for creating a product. */
@@ -93,7 +93,8 @@ export const productFormSchema = z.object({
     .string()
     .trim()
     .min(1, "قیمت الزامی است")
-    .refine((v) => Number(v) > 0, "قیمت باید بزرگتر از صفر باشد"),
+    .refine((v) => Number(v) > 0, "قیمت باید بزرگتر از صفر باشد")
+    .refine((v) => Number(v) <= 100_000_000, "قیمت وارد شده غیرواقعی است"),
   stock: z
     .string()
     .trim()
