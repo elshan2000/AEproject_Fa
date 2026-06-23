@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Produce a self-contained Node.js server in .next/standalone (used by Dockerfile + PM2).
+  output: "standalone",
   images: {
     // Allow optimized remote images (e.g. admin-uploaded URLs / CDNs).
     // Tighten these to your real image host in production.

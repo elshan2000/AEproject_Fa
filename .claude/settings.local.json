@@ -32,7 +32,10 @@
       "Bash(python3 -c \"import urllib.parse;print\\(urllib.parse.quote\\('گل-آزمایشی'\\)\\)\")",
       "Bash(curl -s -o /dev/null -w '  %{http_code}\\\\n' http://localhost:3001/products/__TRACKED_VAR__)",
       "Bash(curl -s http://localhost:3001/products/__TRACKED_VAR__)",
-      "Bash(cd /home/elshan/AEporject *)"
+      "Bash(cd /home/elshan/AEporject *)",
+      "Bash(node ./_dummy.mjs)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(chmod +x /home/elshan/AEporject/scripts/deploy.sh)"
     ],
     "additionalDirectories": [
       "/home/elshan/AEporject/src/app/(shop)/products",
