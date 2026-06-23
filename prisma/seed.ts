@@ -111,7 +111,7 @@ async function main() {
   console.log("🌱 Seeding database...");
 
   // 1. Admin user (idempotent upsert).
-  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@flowershop.local";
+  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@kaya.local";
   const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "admin12345";
   const passwordHash = await bcrypt.hash(adminPassword, 12);
 
