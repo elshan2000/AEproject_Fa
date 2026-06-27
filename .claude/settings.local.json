@@ -69,7 +69,9 @@
       "Bash(grep -v \"^$\")",
       "Bash(npm config *)",
       "Bash(curl -s --max-time 5 https://registry.npmjs.org/next/latest)",
-      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('version',''\\)\\)\")"
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('version',''\\)\\)\")",
+      "Bash(sudo -n cp /tmp/claude-1000/-home-elshan-Desktop-AEproject-Fa/c8f30d2e-a2e0-4179-b4ea-7437bf65b5ea/scratchpad/.claudeignore /home/elshan/Desktop/AEproject_Fa/.claudeignore)",
+      "Bash(sudo -n chown elshan:elshan /home/elshan/Desktop/AEproject_Fa/.claudeignore)"
     ],
     "additionalDirectories": [
       "/home/elshan/AEporject/src/app/(shop)/products",

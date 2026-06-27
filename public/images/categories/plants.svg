@@ -1,0 +1,24 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="گیاهان">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCFBF8"/><stop offset="1" stop-color="#EFE7E1"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#AFC2A8"/><stop offset="1" stop-color="#7E9A78"/></linearGradient>
+    <linearGradient id="pot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D8B79E"/><stop offset="1" stop-color="#B98A6C"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- foliage -->
+  <g fill="url(#leaf)">
+    <path d="M400 380 C 300 320, 250 220, 300 150 C 360 210, 400 290, 400 380 Z"/>
+    <path d="M400 380 C 500 320, 550 220, 500 150 C 440 210, 400 290, 400 380 Z"/>
+    <path d="M400 380 C 360 300, 360 200, 400 120 C 440 200, 440 300, 400 380 Z"/>
+    <path d="M400 380 C 320 360, 240 300, 230 250 C 320 270, 380 320, 400 380 Z"/>
+    <path d="M400 380 C 480 360, 560 300, 570 250 C 480 270, 420 320, 400 380 Z"/>
+  </g>
+  <g stroke="#5F7A5A" stroke-width="2" opacity="0.5" fill="none">
+    <path d="M400 380 C 360 290, 340 210, 320 160"/><path d="M400 380 C 440 290, 460 210, 480 160"/><path d="M400 380 L 400 140"/>
+  </g>
+  <!-- pot -->
+  <path d="M320 400 L 480 400 L 458 540 Q 400 555 342 540 Z" fill="url(#pot)"/>
+  <rect x="312" y="384" width="176" height="26" rx="8" fill="#C79E84"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="گل">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCFBF8"/><stop offset="1" stop-color="#F1E2E7"/>
+    </linearGradient>
+    <radialGradient id="r1" cx="0.5" cy="0.45" r="0.6"><stop offset="0" stop-color="#F3D9E0"/><stop offset="0.5" stop-color="#D98EA3"/><stop offset="1" stop-color="#AE4A63"/></radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <path d="M400 560 L 400 360" stroke="#B98DA0" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="356" cy="470" rx="52" ry="16" transform="rotate(-30 356 470)" fill="#C9A6B2"/>
+  <ellipse cx="446" cy="440" rx="50" ry="16" transform="rotate(30 446 440)" fill="#C9A6B2"/>
+  <g transform="translate(400 300)" fill="url(#r1)">
+    <circle r="48" cx="0" cy="-70"/><circle r="48" cx="66" cy="-22"/><circle r="48" cx="41" cy="57"/><circle r="48" cx="-41" cy="57"/><circle r="48" cx="-66" cy="-22"/>
+    <circle r="42" cx="0" cy="0" fill="#8E3A50"/>
+  </g>
+</svg>

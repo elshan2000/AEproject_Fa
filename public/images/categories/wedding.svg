@@ -1,0 +1,26 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="عروسی">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F6EEF0"/>
+    </linearGradient>
+    <radialGradient id="ivory" cx="0.5" cy="0.4" r="0.65"><stop offset="0" stop-color="#FFFFFF"/><stop offset="0.6" stop-color="#FBF3EC"/><stop offset="1" stop-color="#EAD9C5"/></radialGradient>
+    <radialGradient id="blush" cx="0.5" cy="0.4" r="0.65"><stop offset="0" stop-color="#FDF6F8"/><stop offset="0.6" stop-color="#F1C7D3"/><stop offset="1" stop-color="#D98EA3"/></radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- delicate arch -->
+  <path d="M180 470 Q 400 150 620 470" stroke="#C9A36B" stroke-width="4" fill="none" opacity="0.7"/>
+  <circle cx="400" cy="200" r="9" fill="#C9A36B" opacity="0.6"/>
+  <!-- cascade of ivory blooms -->
+  <g>
+    <circle cx="400" cy="300" r="82" fill="url(#ivory)"/>
+    <circle cx="320" cy="360" r="58" fill="url(#blush)"/>
+    <circle cx="480" cy="360" r="60" fill="url(#ivory)"/>
+    <circle cx="375" cy="430" r="44" fill="url(#ivory)"/>
+    <circle cx="455" cy="445" r="40" fill="url(#blush)"/>
+    <circle cx="400" cy="360" r="34" fill="url(#blush)"/>
+  </g>
+  <g fill="#EAD9C5"><circle cx="400" cy="300" r="20"/></g>
+  <!-- trailing greenery -->
+  <path d="M360 470 C 340 520, 360 560, 340 590" stroke="#C9A6B2" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M450 470 C 470 520, 450 560, 470 590" stroke="#C9A6B2" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>

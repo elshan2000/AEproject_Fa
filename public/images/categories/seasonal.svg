@@ -1,0 +1,20 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="فصلی">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCFBF8"/><stop offset="1" stop-color="#F3EAE0"/>
+    </linearGradient>
+    <linearGradient id="tRose" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E79BAE"/><stop offset="1" stop-color="#C25A74"/></linearGradient>
+    <linearGradient id="tGold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2D38A"/><stop offset="1" stop-color="#E0B25C"/></linearGradient>
+    <linearGradient id="tBlush" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7D2DC"/><stop offset="1" stop-color="#E29FB0"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- stems -->
+  <g stroke="#8FA886" stroke-width="6" stroke-linecap="round"><path d="M320 560 L 320 320"/><path d="M400 575 L 400 300"/><path d="M480 560 L 480 320"/></g>
+  <g fill="#9DB39A"><ellipse cx="320" cy="470" rx="48" ry="14" transform="rotate(-12 320 470)"/><ellipse cx="400" cy="500" rx="50" ry="14" transform="rotate(6 400 500)"/><ellipse cx="480" cy="470" rx="48" ry="14" transform="rotate(12 480 470)"/></g>
+  <!-- tulip heads -->
+  <g>
+    <path d="M286 320 Q 286 250 320 240 Q 354 250 354 320 Q 320 300 286 320 Z" fill="url(#tBlush)"/>
+    <path d="M364 300 Q 364 224 400 214 Q 436 224 436 300 Q 400 280 364 300 Z" fill="url(#tRose)"/>
+    <path d="M446 320 Q 446 250 480 240 Q 514 250 514 320 Q 480 300 446 320 Z" fill="url(#tGold)"/>
+  </g>
+</svg>

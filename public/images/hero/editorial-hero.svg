@@ -1,0 +1,115 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="آرایش گل کایا">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCFBF8"/>
+      <stop offset="0.55" stop-color="#F7EEF1"/>
+      <stop offset="1" stop-color="#F0DEE4"/>
+    </linearGradient>
+    <linearGradient id="rightWash" x1="600" y1="0" x2="1600" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCFBF8" stop-opacity="0"/>
+      <stop offset="0.7" stop-color="#FCFBF8" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#FCFBF8" stop-opacity="0.9"/>
+    </linearGradient>
+    <radialGradient id="bloomRose" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#F3D9E0"/>
+      <stop offset="0.45" stop-color="#D98EA3"/>
+      <stop offset="1" stop-color="#AE4A63"/>
+    </radialGradient>
+    <radialGradient id="bloomDeep" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#D98EA3"/>
+      <stop offset="0.5" stop-color="#AE4A63"/>
+      <stop offset="1" stop-color="#8E3A50"/>
+    </radialGradient>
+    <radialGradient id="bloomBlush" cx="0.5" cy="0.4" r="0.65">
+      <stop offset="0" stop-color="#FDF6F8"/>
+      <stop offset="0.6" stop-color="#F1C7D3"/>
+      <stop offset="1" stop-color="#D98EA3"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#E7B8C6" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#E7B8C6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+  </defs>
+
+  <!-- base -->
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+
+  <!-- soft depth glows (lower-left) -->
+  <circle cx="360" cy="720" r="320" fill="url(#glow)" filter="url(#soft)"/>
+  <circle cx="640" cy="540" r="260" fill="url(#glow)" filter="url(#soft)"/>
+
+  <!-- ================= botanical sprigs (dusty mauve foliage) ================= -->
+  <g stroke="#B98DA0" stroke-width="5" stroke-linecap="round" fill="none" opacity="0.85">
+    <path d="M250 980 C 300 760, 380 600, 520 470"/>
+    <path d="M150 980 C 160 800, 120 640, 60 520"/>
+    <path d="M470 980 C 520 800, 640 700, 760 640"/>
+  </g>
+  <g fill="#C9A6B2" opacity="0.8">
+    <!-- leaves along stem 1 -->
+    <ellipse cx="300" cy="780" rx="46" ry="16" transform="rotate(-38 300 780)"/>
+    <ellipse cx="345" cy="690" rx="42" ry="15" transform="rotate(-48 345 690)"/>
+    <ellipse cx="410" cy="600" rx="40" ry="14" transform="rotate(-55 410 600)"/>
+    <!-- leaves stem 2 -->
+    <ellipse cx="150" cy="800" rx="40" ry="14" transform="rotate(28 150 800)"/>
+    <ellipse cx="120" cy="690" rx="38" ry="13" transform="rotate(18 120 690)"/>
+    <!-- leaves stem 3 -->
+    <ellipse cx="560" cy="760" rx="44" ry="15" transform="rotate(-18 560 760)"/>
+    <ellipse cx="660" cy="700" rx="42" ry="14" transform="rotate(-12 660 700)"/>
+  </g>
+
+  <!-- eucalyptus-style round leaves on a slender branch -->
+  <g opacity="0.7">
+    <path d="M820 980 C 740 820, 700 660, 690 520" stroke="#C9A6B2" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <g fill="#D7B6C2">
+      <circle cx="700" cy="560" r="20"/>
+      <circle cx="678" cy="620" r="22"/>
+      <circle cx="712" cy="680" r="20"/>
+      <circle cx="690" cy="740" r="22"/>
+      <circle cx="724" cy="800" r="19"/>
+    </g>
+  </g>
+
+  <!-- ================= blooms ================= -->
+  <!-- big focal rose -->
+  <g transform="translate(470 470)">
+    <circle r="150" fill="url(#bloomRose)"/>
+    <g fill="#8E3A50" opacity="0.18">
+      <ellipse rx="120" ry="44" transform="rotate(20)"/>
+      <ellipse rx="120" ry="44" transform="rotate(80)"/>
+      <ellipse rx="120" ry="44" transform="rotate(140)"/>
+    </g>
+    <circle r="56" fill="url(#bloomDeep)"/>
+    <circle r="22" fill="#7A3045"/>
+  </g>
+
+  <!-- secondary blush peony -->
+  <g transform="translate(700 600)">
+    <circle r="110" fill="url(#bloomBlush)"/>
+    <g fill="#AE4A63" opacity="0.14">
+      <ellipse rx="88" ry="34" transform="rotate(10)"/>
+      <ellipse rx="88" ry="34" transform="rotate(70)"/>
+      <ellipse rx="88" ry="34" transform="rotate(130)"/>
+    </g>
+    <circle r="40" fill="url(#bloomRose)"/>
+    <circle r="15" fill="#C97E94"/>
+  </g>
+
+  <!-- small deep bud -->
+  <g transform="translate(300 560)">
+    <circle r="64" fill="url(#bloomDeep)"/>
+    <circle r="24" fill="#7A3045"/>
+  </g>
+
+  <!-- tiny accent buds -->
+  <g>
+    <circle cx="600" cy="430" r="30" fill="url(#bloomBlush)"/>
+    <circle cx="560" cy="720" r="26" fill="url(#bloomRose)"/>
+    <circle cx="820" cy="540" r="22" fill="url(#bloomBlush)"/>
+  </g>
+
+  <!-- right-side warm wash so the headline stays legible -->
+  <rect width="1600" height="1000" fill="url(#rightWash)"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="دسته‌گل">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FCFBF8"/><stop offset="1" stop-color="#F1E2E7"/>
+    </linearGradient>
+    <radialGradient id="r1" cx="0.5" cy="0.45" r="0.6"><stop offset="0" stop-color="#F3D9E0"/><stop offset="0.5" stop-color="#D98EA3"/><stop offset="1" stop-color="#AE4A63"/></radialGradient>
+    <radialGradient id="r2" cx="0.5" cy="0.4" r="0.65"><stop offset="0" stop-color="#FDF6F8"/><stop offset="0.6" stop-color="#F1C7D3"/><stop offset="1" stop-color="#D98EA3"/></radialGradient>
+    <linearGradient id="wrap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7EEF1"/><stop offset="1" stop-color="#E7CDD6"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- wrap cone -->
+  <path d="M400 560 L 300 360 Q 400 400 500 360 Z" fill="url(#wrap)" stroke="#D9B7C2" stroke-width="3"/>
+  <!-- stems -->
+  <g stroke="#B98DA0" stroke-width="5" stroke-linecap="round"><path d="M400 420 L 330 250"/><path d="M400 420 L 400 230"/><path d="M400 420 L 470 250"/></g>
+  <ellipse cx="365" cy="320" rx="40" ry="13" transform="rotate(-35 365 320)" fill="#C9A6B2"/>
+  <ellipse cx="445" cy="320" rx="40" ry="13" transform="rotate(35 445 320)" fill="#C9A6B2"/>
+  <!-- blooms -->
+  <g transform="translate(330 230)"><circle r="70" fill="url(#r1)"/><circle r="26" fill="#7A3045"/></g>
+  <g transform="translate(470 235)"><circle r="66" fill="url(#r2)"/><circle r="22" fill="#C97E94"/></g>
+  <g transform="translate(400 195)"><circle r="78" fill="url(#r1)"/><circle r="30" fill="#7A3045"/></g>
+  <circle cx="300" cy="300" r="26" fill="url(#r2)"/><circle cx="505" cy="305" r="24" fill="url(#r2)"/>
+</svg>

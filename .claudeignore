@@ -1,0 +1,33 @@
+# .claudeignore — documents paths that are noise for AI-assisted work.
+#
+# NOTE: Claude Code does not natively read this file; its search already honors
+# .gitignore. The real read-blocking lives in .claude/settings.json (permissions.deny).
+# This file is kept as documentation + future-proofing.
+
+# Dependencies
+node_modules/
+.pnp/
+
+# Next.js build output
+.next/
+out/
+build/
+
+# TypeScript / build caches
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Prisma generated client
+src/generated/
+node_modules/.prisma/
+
+# Lockfiles (large, low-signal)
+package-lock.json
+
+# Runtime / uploads (ephemeral)
+public/uploads/
+
+# Env & logs
+.env
+.env*.local
+*.log

@@ -24,6 +24,19 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "4mb",
     },
   },
+  // Serve runtime-uploaded images through a dynamic route handler instead of
+  // Next's static `public/` serving (which, under output:"standalone", only
+  // picks up files present at server startup). `beforeFiles` ensures even the
+  // next/image optimizer's internal fetch is routed to the handler.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: "/uploads/:path*", destination: "/api/media/:path*" },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
 };
 
 export default nextConfig;
