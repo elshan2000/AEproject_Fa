@@ -7,6 +7,7 @@ import { Menu } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/shop/theme-toggle";
 import {
   Sheet,
   SheetContent,
@@ -47,20 +48,21 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden md:block">
-          <Button asChild size="sm">
+        <div className="flex items-center gap-1.5">
+          <ThemeToggle />
+
+          <Button asChild size="sm" className="hidden md:inline-flex">
             <Link href="/products">خرید</Link>
           </Button>
-        </div>
 
-        {/* Mobile nav — opens from the left (the end side in RTL). */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon" aria-label="باز کردن منو">
-              <Menu className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-72">
+          {/* Mobile nav — opens from the left (the end side in RTL). */}
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild className="md:hidden">
+              <Button variant="ghost" size="icon" aria-label="باز کردن منو">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-72">
             <SheetTitle className="mb-6">{siteConfig.name}</SheetTitle>
             <ul className="flex flex-col gap-1">
               {siteConfig.nav.map((item) => (
@@ -86,7 +88,8 @@ export function Navbar() {
               </Link>
             </Button>
           </SheetContent>
-        </Sheet>
+          </Sheet>
+        </div>
       </nav>
     </header>
   );

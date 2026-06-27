@@ -55,7 +55,21 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fa" dir="rtl" className={vazirmatn.variable}>
+    <html
+      lang="fa"
+      dir="rtl"
+      className={vazirmatn.variable}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* No-flash theme: set the `dark` class before paint, based on a saved
+            preference or the OS setting. Mirrored by ThemeToggle + localStorage. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body>
         {children}
         <Toaster />
