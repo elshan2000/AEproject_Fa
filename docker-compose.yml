@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: docker.arvancloud.ir/postgres:16-alpine
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-flowershop}
@@ -19,6 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
+    user: root
     depends_on:
       db:
         condition: service_healthy
@@ -37,6 +38,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      target: builder
     profiles: ["migrate"]
     depends_on:
       db:
