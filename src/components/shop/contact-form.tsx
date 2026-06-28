@@ -66,7 +66,7 @@ export function ContactForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {productName && (
-        <div className="rounded-md bg-secondary/60 px-4 py-3 text-sm">
+        <div className="border border-border bg-muted px-4 py-3 text-sm">
           دربارهٔ محصول: <span className="font-medium">{productName}</span>
         </div>
       )}

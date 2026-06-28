@@ -51,7 +51,7 @@ export default async function ProductsPage({
   };
 
   return (
-    <div className="section py-12 lg:py-16">
+    <div className="section py-12 lg:py-20">
       <SectionHeading
         align="left"
         eyebrow="مجموعه"
@@ -59,7 +59,7 @@ export default async function ProductsPage({
         description="دسته‌گل‌های دست‌چین برای هر مناسبت."
       />
 
-      <div className="mt-8">
+      <div className="mt-10">
         <ProductsFilters categories={categories} />
       </div>
 

@@ -34,3 +34,9 @@ export const collectionImages = {
   minimal: "/images/collections/minimal.png",
   luxury: "/images/collections/luxury.png",
 };
+
+/** About-page editorial photos — drop yours in public/images/about/ . */
+export const aboutImages = {
+  one: "/images/about/about-1.png",
+  two: "/images/about/about-2.png",
+};

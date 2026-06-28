@@ -10,11 +10,9 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border py-16 text-center">
-      <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-secondary">
-        <Flower2 className="h-7 w-7 text-primary" />
-      </div>
-      <h3 className="font-serif text-xl font-medium">{title}</h3>
+    <div className="flex flex-col items-center justify-center border border-dashed border-border py-20 text-center">
+      <Flower2 strokeWidth={1} className="h-8 w-8 text-muted-foreground" />
+      <h3 className="mt-4 font-serif text-xl font-medium">{title}</h3>
       {description && (
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">
           {description}

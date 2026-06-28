@@ -17,10 +17,18 @@ export function SectionHeading({
           : "max-w-2xl text-start"
       }
     >
-      {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
-      <h2 className="text-3xl font-semibold sm:text-4xl">{title}</h2>
+      {eyebrow && (
+        <p className="mb-4 text-xs font-medium text-muted-foreground">
+          {eyebrow}
+        </p>
+      )}
+      <h2 className="font-serif text-4xl font-semibold leading-tight sm:text-5xl">
+        {title}
+      </h2>
       {description && (
-        <p className="mt-3 text-muted-foreground">{description}</p>
+        <p className="mt-4 leading-relaxed text-muted-foreground">
+          {description}
+        </p>
       )}
     </div>
   );

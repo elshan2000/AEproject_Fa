@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, Phone, Truck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ProductGallery } from "@/components/shop/product-gallery";
 import { ProductGrid } from "@/components/shop/product-grid";
 import { SectionHeading } from "@/components/shop/section-heading";
@@ -60,42 +59,42 @@ export default async function ProductDetailPage({
   );
 
   return (
-    <div className="section py-10 lg:py-14">
+    <div className="section py-12 lg:py-20">
       <Link
         href="/products"
-        className="mb-8 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
+        className="mb-10 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ChevronRight className="h-4 w-4" /> بازگشت به فروشگاه
       </Link>
 
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
         <ProductGallery imageUrl={product.imageUrl} alt={product.name} />
 
-        <div className="flex flex-col">
+        <div className="flex flex-col lg:py-4">
           <Link
             href={`/products?category=${product.category.slug}`}
-            className="text-xs text-muted-foreground hover:text-primary"
+            className="text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             {product.category.name}
           </Link>
-          <h1 className="mt-2 text-4xl font-semibold">{product.name}</h1>
+          <h1 className="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl">
+            {product.name}
+          </h1>
 
-          <div className="mt-4 flex items-center gap-3">
-            <span className="text-2xl font-semibold text-primary">
+          <div className="mt-5 flex items-center gap-3">
+            <span className="text-2xl font-medium">
               {formatPrice(product.price)}
             </span>
-            {inStock ? (
-              <Badge variant="success">موجود</Badge>
-            ) : (
-              <Badge variant="secondary">ناموجود</Badge>
-            )}
+            <span className="text-sm text-muted-foreground">
+              · {inStock ? "موجود" : "ناموجود"}
+            </span>
           </div>
 
-          <p className="mt-6 leading-relaxed text-muted-foreground">
+          <p className="mt-7 leading-relaxed text-muted-foreground">
             {product.description}
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-9 flex flex-wrap gap-3">
             <Button asChild size="lg" disabled={!inStock}>
               <Link href={`/contact?product=${product.slug}`}>
                 ثبت سفارش / استعلام
@@ -112,23 +111,23 @@ export default async function ProductDetailPage({
             </Button>
           </div>
 
-          <ul className="mt-10 space-y-3 border-t border-border/60 pt-6 text-sm text-muted-foreground">
+          <ul className="mt-10 space-y-3 border-t border-border pt-8 text-sm text-muted-foreground">
             <li className="flex items-center gap-3">
-              <Sparkles className="h-4 w-4 text-primary" /> دست‌چین‌شده با شاخه‌های
-              تازهٔ فصلی
+              <Sparkles strokeWidth={1.5} className="h-4 w-4 text-foreground" />{" "}
+              دست‌چین‌شده با شاخه‌های تازهٔ فصلی
             </li>
             <li className="flex items-center gap-3">
-              <Truck className="h-4 w-4 text-primary" /> امکان تحویل همان‌روز در
-              تهران
+              <Truck strokeWidth={1.5} className="h-4 w-4 text-foreground" /> امکان
+              تحویل همان‌روز در تهران
             </li>
           </ul>
         </div>
       </div>
 
       {related.length > 0 && (
-        <section className="mt-24">
+        <section className="mt-28">
           <SectionHeading align="left" title="شاید بپسندید" />
-          <div className="mt-8">
+          <div className="mt-10">
             <ProductGrid products={related} />
           </div>
         </section>

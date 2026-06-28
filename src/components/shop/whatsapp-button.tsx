@@ -9,6 +9,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
+// Monochrome (editorial) — the brand green is dropped to keep the luxury look.
 /** Inline WhatsApp call-to-action link. */
 export function WhatsAppButton({
   text,
@@ -26,7 +27,7 @@ export function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md bg-[#25D366] px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90",
+        "inline-flex items-center justify-center gap-2 border border-foreground/80 px-6 py-3 text-sm text-foreground transition-colors hover:bg-foreground hover:text-background",
         className
       )}
     >
@@ -44,9 +45,9 @@ export function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="گفتگو در واتساپ"
-      className="fixed bottom-5 start-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-105"
+      className="fixed bottom-6 start-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform hover:scale-105"
     >
-      <WhatsAppIcon className="h-7 w-7" />
+      <WhatsAppIcon className="h-6 w-6" />
     </a>
   );
 }

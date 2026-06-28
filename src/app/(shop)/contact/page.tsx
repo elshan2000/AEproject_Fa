@@ -23,7 +23,7 @@ export default async function ContactPage({
   const product = productSlug ? await getProductBySlug(productSlug) : null;
 
   return (
-    <div className="section py-12 lg:py-16">
+    <div className="section py-12 lg:py-20">
       <SectionHeading
         align="left"
         eyebrow="در خدمت شما هستیم"
@@ -31,56 +31,48 @@ export default async function ContactPage({
         description="برای سفارش، مشاوره یا هر پرسشی خوشحال می‌شویم صدای شما را بشنویم."
       />
 
-      <div className="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
+      <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-20">
         {/* Contact details */}
         <div className="space-y-8">
-          <ul className="space-y-5">
+          <ul className="space-y-6">
             <li className="flex items-start gap-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                <Phone className="h-5 w-5" />
-              </span>
+              <Phone strokeWidth={1.5} className="mt-0.5 h-5 w-5 shrink-0 text-foreground" />
               <div>
-                <p className="font-medium">تلفن</p>
+                <p className="text-sm font-medium">تلفن</p>
                 <a
                   href={`tel:${siteConfig.phoneE164}`}
                   dir="ltr"
-                  className="text-muted-foreground hover:text-primary"
+                  className="text-sm text-muted-foreground hover:text-foreground"
                 >
                   {siteConfig.phone}
                 </a>
               </div>
             </li>
             <li className="flex items-start gap-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                <Mail className="h-5 w-5" />
-              </span>
+              <Mail strokeWidth={1.5} className="mt-0.5 h-5 w-5 shrink-0 text-foreground" />
               <div>
-                <p className="font-medium">ایمیل</p>
+                <p className="text-sm font-medium">ایمیل</p>
                 <a
                   href={`mailto:${siteConfig.email}`}
                   dir="ltr"
-                  className="text-muted-foreground hover:text-primary"
+                  className="text-sm text-muted-foreground hover:text-foreground"
                 >
                   {siteConfig.email}
                 </a>
               </div>
             </li>
             <li className="flex items-start gap-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                <MapPin className="h-5 w-5" />
-              </span>
+              <MapPin strokeWidth={1.5} className="mt-0.5 h-5 w-5 shrink-0 text-foreground" />
               <div>
-                <p className="font-medium">نشانی</p>
-                <p className="text-muted-foreground">{siteConfig.address}</p>
+                <p className="text-sm font-medium">نشانی</p>
+                <p className="text-sm text-muted-foreground">{siteConfig.address}</p>
               </div>
             </li>
             <li className="flex items-start gap-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-primary">
-                <Clock className="h-5 w-5" />
-              </span>
+              <Clock strokeWidth={1.5} className="mt-0.5 h-5 w-5 shrink-0 text-foreground" />
               <div>
-                <p className="font-medium">ساعات کاری</p>
-                <p className="text-muted-foreground">{siteConfig.hours}</p>
+                <p className="text-sm font-medium">ساعات کاری</p>
+                <p className="text-sm text-muted-foreground">{siteConfig.hours}</p>
               </div>
             </li>
           </ul>
@@ -100,8 +92,8 @@ export default async function ContactPage({
         </div>
 
         {/* Form */}
-        <div className="rounded-2xl border border-border/60 bg-card p-6 sm:p-8">
-          <h2 className="mb-6 text-xl font-semibold">پیام بگذارید</h2>
+        <div className="border border-border bg-card p-6 sm:p-8">
+          <h2 className="mb-6 font-serif text-2xl font-semibold">پیام بگذارید</h2>
           <ContactForm
             productSlug={product?.slug}
             productName={product?.name}
