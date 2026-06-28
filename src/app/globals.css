@@ -3,74 +3,75 @@
 @tailwind utilities;
 
 /**
- * Luxury florist theme — warm white background, muted rose primary, soft
- * blush accents. All colors are HSL tokens so shadcn/ui components inherit them.
+ * Editorial luxury theme — warm off-white canvas, near-black ink, soft dusty
+ * pink accent, black buttons. Minimal, fashion-magazine aesthetic. All colors
+ * are HSL tokens so shadcn/ui + every component inherit them.
  */
 @layer base {
   :root {
-    --background: 30 33% 99%; /* warm white */
-    --foreground: 340 10% 15%; /* warm near-black */
+    --background: 40 14% 96%; /* #F7F5F2 warm off-white */
+    --foreground: 0 0% 7%; /* #111111 ink */
 
-    --card: 0 0% 100%;
-    --card-foreground: 340 10% 15%;
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 0 0% 7%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 340 10% 15%;
+    --popover-foreground: 0 0% 7%;
 
-    --primary: 345 45% 47%; /* muted rose */
+    --primary: 0 0% 7%; /* black — buttons & primary actions */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 345 30% 96%; /* soft blush */
-    --secondary-foreground: 345 35% 30%;
+    --secondary: 0 0% 100%; /* white surfaces */
+    --secondary-foreground: 0 0% 7%;
 
-    --muted: 30 15% 95%; /* warm grey */
-    --muted-foreground: 340 6% 45%;
+    --muted: 40 14% 93%;
+    --muted-foreground: 0 0% 44%; /* #6F6F6F secondary text */
 
-    --accent: 345 38% 94%; /* blush accent */
-    --accent-foreground: 345 35% 28%;
+    --accent: 344 24% 80%; /* #D7C3C8 dusty pink */
+    --accent-foreground: 0 0% 7%;
 
-    --destructive: 0 70% 50%;
+    --destructive: 0 65% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 30 12% 90%;
-    --input: 30 12% 88%;
-    --ring: 345 45% 47%;
+    --border: 33 16% 91%; /* #ECE7E2 */
+    --input: 33 16% 86%;
+    --ring: 0 0% 7%;
 
-    --radius: 0.625rem;
+    --radius: 0.125rem; /* near-sharp corners */
   }
 
-  /* Dark theme — deep warm plum with a luminous rose primary. Activated by the
-     `dark` class on <html> (see the no-flash script in layout.tsx). */
+  /* Dark editorial theme — near-black canvas, warm off-white ink, light buttons,
+     dusty-pink accent. Toggled via the `dark` class (ThemeToggle + no-flash). */
   .dark {
-    --background: 335 24% 8%; /* deep warm plum-black */
-    --foreground: 30 25% 92%; /* warm off-white */
+    --background: 0 0% 7%;
+    --foreground: 40 14% 92%;
 
-    --card: 335 18% 12%;
-    --card-foreground: 30 25% 92%;
+    --card: 0 0% 10%;
+    --card-foreground: 40 14% 92%;
 
-    --popover: 335 20% 11%;
-    --popover-foreground: 30 25% 92%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 40 14% 92%;
 
-    --primary: 345 72% 67%; /* luminous rose — pops on dark */
-    --primary-foreground: 335 35% 10%;
+    --primary: 40 14% 94%; /* light — buttons invert to off-white */
+    --primary-foreground: 0 0% 7%;
 
-    --secondary: 335 14% 18%; /* muted plum surface */
-    --secondary-foreground: 345 30% 86%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 40 14% 92%;
 
-    --muted: 335 12% 16%;
-    --muted-foreground: 335 10% 64%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 345 26% 22%; /* deep blush accent */
-    --accent-foreground: 345 35% 88%;
+    --accent: 344 24% 75%; /* dusty pink */
+    --accent-foreground: 0 0% 7%;
 
-    --destructive: 0 62% 55%;
+    --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 335 14% 20%;
-    --input: 335 14% 22%;
-    --ring: 345 72% 67%;
+    --border: 0 0% 18%;
+    --input: 0 0% 20%;
+    --ring: 40 14% 94%;
 
-    --radius: 0.625rem;
+    --radius: 0.125rem;
   }
 }
 
@@ -80,8 +81,11 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans), Tahoma, system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  /* Persian headings stay on Vazirmatn (font-serif). Latin display words use
+     the `font-display` (Playfair) / `font-latin` (Inter) utilities explicitly. */
   h1,
   h2,
   h3,
@@ -93,45 +97,37 @@
 /* Reusable utility helpers */
 @layer components {
   .section {
-    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[1400px] px-6 sm:px-8 lg:px-12;
   }
-  /* Persian script must not have letter-spacing/uppercase (it disconnects
-     the joined letterforms), so the eyebrow uses weight + color only. */
+  /* Persian script must not have letter-spacing/uppercase (it disconnects the
+     joined letterforms), so the eyebrow uses weight + color only. */
   .eyebrow {
-    @apply text-xs font-semibold text-primary;
+    @apply text-xs font-semibold text-foreground;
   }
 }
 
-/* Hero motion — staggered reveal + gentle floating floral accents.
-   Disabled for users who prefer reduced motion. */
-@keyframes hero-rise {
+/* Scroll-reveal — subtle fade-up driven by the <Reveal> component +
+   IntersectionObserver. Disabled for reduced-motion users. */
+@keyframes reveal-up {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-@keyframes hero-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
+.reveal {
+  opacity: 0;
 }
-.hero-rise {
-  animation: hero-rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-.animate-float {
-  animation: hero-float 6s ease-in-out infinite;
+.reveal.is-visible {
+  animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-rise,
-  .animate-float {
+  .reveal,
+  .reveal.is-visible {
     animation: none;
+    opacity: 1;
   }
 }

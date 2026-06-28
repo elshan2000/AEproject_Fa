@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 /**
  * Toggles the `dark` class on <html> and persists the choice in localStorage.
- * The initial class is set before paint by the inline script in layout.tsx, so
- * this only mirrors/updates it. Renders a stable icon until mounted to avoid a
- * hydration mismatch.
+ * The initial class is set before paint by the inline script in layout.tsx;
+ * this mirrors/updates it. Renders a stable icon until mounted (no mismatch).
  */
 export function ThemeToggle({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false);
@@ -31,19 +30,17 @@ export function ThemeToggle({ className }: { className?: string }) {
   }
 
   return (
-    <Button
+    <button
       type="button"
-      variant="ghost"
-      size="icon"
       onClick={toggle}
       aria-label={mounted && dark ? "حالت روشن" : "حالت تاریک"}
-      className={className}
+      className={cn("transition-opacity hover:opacity-60", className)}
     >
       {mounted && dark ? (
-        <Sun className="h-5 w-5" />
+        <Sun strokeWidth={1.5} className="h-5 w-5" />
       ) : (
-        <Moon className="h-5 w-5" />
+        <Moon strokeWidth={1.5} className="h-5 w-5" />
       )}
-    </Button>
+    </button>
   );
 }

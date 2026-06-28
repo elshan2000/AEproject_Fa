@@ -1,127 +1,95 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Flower2, Leaf, Sparkles, Truck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { VolumeX } from "lucide-react";
+import { demoImages } from "@/lib/demo-images";
+import { Reveal } from "@/components/shop/reveal";
 
-// Editorial / image-led hero for the flower studio: full-bleed brand
-// illustration, a studio badge, staggered reveal, floating floral accents and a
-// feature strip. Scrims are vertical so they stay correct regardless of
-// direction; decorative accents are positioned with logical (start/end) insets.
+// Editorial hero (matches the reference mockup): a full-bleed figure-with-bouquet
+// image bleeding to the top/right edges, an oversized faded KAYA wordmark behind,
+// and the headline lowered to the mid-left. Pulled up under the (transparent)
+// sticky header via -mt-20.
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden">
-      <div className="relative min-h-[78vh] w-full lg:min-h-[88vh]">
-        {/* Light + dark illustrations; CSS swaps them with the theme. */}
+    <section className="relative -mt-20 min-h-screen overflow-hidden bg-background">
+      {/* Full-bleed image: top band on mobile, end-side ~54% on desktop (left in RTL) */}
+      <div className="absolute inset-x-0 top-0 h-[48vh] sm:h-[56vh] lg:inset-y-0 lg:start-auto lg:end-0 lg:h-full lg:w-[54%]">
         <Image
-          src="/images/hero/editorial-hero.svg"
-          alt="آرایش گلِ دست‌چین کایا"
+          src={demoImages.hero}
+          alt="گل‌آرایی ادیتوریال کایا"
           fill
           priority
-          sizes="100vw"
-          className="object-cover dark:hidden"
+          sizes="(max-width: 1024px) 100vw, 54vw"
+          className="object-cover"
         />
-        <Image
-          src="/images/hero/editorial-hero-dark.svg"
-          alt="آرایش گلِ دست‌چین کایا"
-          fill
-          sizes="100vw"
-          className="hidden object-cover dark:block"
-        />
-        {/* Readability scrims (vertical = RTL-safe) */}
-        <div aria-hidden className="absolute inset-0 bg-background/20" />
+        {/* Soft fade into the canvas on the inner edge so the wordmark + text blend */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/15 to-transparent"
+          className="absolute inset-0 bg-gradient-to-b from-transparent to-background/95 lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-background"
         />
+      </div>
 
-        {/* Floating floral bokeh accents — drift gently over the bloom side */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <span
-            className="animate-float absolute end-[8%] top-[20%] h-24 w-24 rounded-full bg-primary/15 blur-2xl"
-            style={{ animationDelay: "0s" }}
-          />
-          <span
-            className="animate-float absolute end-[22%] top-[55%] h-32 w-32 rounded-full bg-accent/50 blur-2xl"
-            style={{ animationDelay: "1.4s" }}
-          />
-          <span
-            className="animate-float absolute bottom-[14%] end-[5%] h-20 w-20 rounded-full bg-secondary/70 blur-xl"
-            style={{ animationDelay: "2.8s" }}
-          />
-          <span
-            className="animate-float absolute start-[6%] top-[30%] hidden h-16 w-16 rounded-full bg-primary/10 blur-2xl lg:block"
-            style={{ animationDelay: "2s" }}
-          />
+      {/* Oversized faded brand wordmark */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-[15%] select-none text-center font-display text-[26vw] font-semibold leading-none tracking-[0.08em] text-foreground/[0.05]"
+      >
+        KAYA
+      </span>
+
+      {/* Content (mid-left) */}
+      <div className="section relative flex min-h-screen flex-col justify-end pb-20 pt-[48vh] sm:pt-[56vh] lg:justify-center lg:pb-0 lg:pt-20">
+        <div className="max-w-xl">
+          <Reveal>
+            <h1 className="font-latin text-5xl font-black uppercase leading-[0.95] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              Addicted
+              <br />
+              to
+              <br />
+              Flowers
+            </h1>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="mt-6 text-xl font-medium leading-snug text-foreground sm:text-2xl">
+              جایی که گل و مُد به هم می‌رسند
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              گل‌آرایی‌هایی دست‌ساز و فاخر، با نگاهی مدرن و ادیتوریال به زیبایی.
+            </p>
+          </Reveal>
+          <Reveal delay={280}>
+            <Link
+              href="/products"
+              className="mt-8 inline-flex items-center bg-foreground px-9 py-4 font-latin text-[11px] uppercase tracking-[0.25em] text-background transition-opacity hover:opacity-80"
+            >
+              Shop Collection
+            </Link>
+          </Reveal>
         </div>
       </div>
 
-      <div className="section absolute inset-0 flex items-center">
-        <div className="max-w-xl space-y-6 text-start">
-          <span
-            className="hero-rise inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/60 px-4 py-1.5 text-xs font-semibold text-primary backdrop-blur-sm"
-            style={{ animationDelay: "0ms" }}
-          >
-            <Flower2 className="h-3.5 w-3.5" />
-            استودیوی گل کایا
-          </span>
-
-          <h1
-            className="hero-rise text-balance font-serif text-5xl font-semibold leading-[1.12] sm:text-6xl lg:text-7xl"
-            style={{ animationDelay: "120ms" }}
-          >
-            هنرِ گل،
-            <br />
-            به سبکِ کایا
-          </h1>
-
-          <p
-            className="hero-rise max-w-md text-lg leading-relaxed text-muted-foreground"
-            style={{ animationDelay: "240ms" }}
-          >
-            گل‌آرایی‌هایی دست‌ساز و فاخر، برای آنان که اصالت و ظرافت را
-            می‌شناسند.
-          </p>
-
-          <div
-            className="hero-rise flex flex-wrap gap-3 pt-1"
-            style={{ animationDelay: "360ms" }}
-          >
-            <Button asChild size="lg">
-              <Link href="/products">مشاهدهٔ مجموعه</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/about">داستان ما</Link>
-            </Button>
-          </div>
-
-          <div
-            className="hero-rise flex flex-wrap items-center gap-x-5 gap-y-2 pt-3 text-sm text-muted-foreground"
-            style={{ animationDelay: "480ms" }}
-          >
-            <span className="flex items-center gap-1.5">
-              <Sparkles className="h-4 w-4 text-primary" />
-              گل‌آراییِ سفارشی
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Truck className="h-4 w-4 text-primary" />
-              تحویل در همان روز
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Leaf className="h-4 w-4 text-primary" />
-              گل‌های تازهٔ روز
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll cue */}
+      {/* Decorative slide counter (right edge) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-6 flex justify-center"
+        className="absolute end-6 top-1/2 z-10 hidden -translate-y-1/2 flex-col items-center gap-3 font-latin text-xs text-foreground lg:flex"
       >
-        <span className="animate-float flex flex-col items-center gap-1 text-xs text-muted-foreground">
-          بیشتر ببینید
-          <ChevronDown className="h-4 w-4" />
+        <span>01</span>
+        <span className="h-8 w-px bg-foreground/30" />
+        <span className="text-foreground/50">02</span>
+        <span className="text-foreground/50">03</span>
+      </div>
+
+      {/* Mute + year (bottom-right) */}
+      <div
+        aria-hidden
+        className="absolute bottom-8 end-8 z-10 hidden items-center gap-3 lg:flex"
+      >
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-foreground/30 text-background backdrop-blur">
+          <VolumeX strokeWidth={1.5} className="h-4 w-4" />
+        </span>
+        <span className="font-latin text-xs tracking-[0.3em] text-foreground">
+          2024
         </span>
       </div>
     </section>

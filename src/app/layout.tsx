@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
-import { Vazirmatn } from "next/font/google";
+import { Vazirmatn, Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { env } from "@/lib/env";
 import { Toaster } from "@/components/ui/toaster";
 
 // Vazirmatn — the de-facto standard Persian (Farsi) web font. Covers Arabic
-// (Persian) and Latin glyphs, so it serves both headings and body text.
+// (Persian) and Latin glyphs, so it serves all Persian headings and body text.
 const vazirmatn = Vazirmatn({
   subsets: ["arabic", "latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+// Latin-only editorial fonts: Playfair Display for serif display words (the
+// KAYA wordmark, section titles) and Inter for crisp latin UI/labels.
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -58,11 +73,11 @@ export default function RootLayout({
     <html
       lang="fa"
       dir="rtl"
-      className={vazirmatn.variable}
+      className={`${vazirmatn.variable} ${playfair.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <head>
-        {/* No-flash theme: set the `dark` class before paint, based on a saved
+        {/* No-flash dark mode: set the `dark` class before paint from a saved
             preference or the OS setting. Mirrored by ThemeToggle + localStorage. */}
         <script
           dangerouslySetInnerHTML={{

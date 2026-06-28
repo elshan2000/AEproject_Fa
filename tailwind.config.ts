@@ -17,9 +17,13 @@ const config: Config = {
     extend: {
       fontFamily: {
         // Vazirmatn (via --font-sans) with Tahoma as a Persian-safe fallback.
-        // Headings reuse the same family — Persian script has no serif tradition.
+        // Persian headings reuse the same family — Persian has no serif tradition.
         sans: ["var(--font-sans)", "Tahoma", "system-ui", "sans-serif"],
         serif: ["var(--font-sans)", "Tahoma", "system-ui", "sans-serif"],
+        // Latin-only display + body fonts for the editorial design. NEVER apply
+        // these to Persian text/digits — Playfair/Inter have no Persian glyphs.
+        display: ["var(--font-display)", "Playfair Display", "Georgia", "serif"],
+        latin: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

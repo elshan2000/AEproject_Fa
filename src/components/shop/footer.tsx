@@ -1,72 +1,66 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
-import { siteConfig } from "@/lib/site";
-import { toPersianDigits } from "@/lib/utils";
 
+const LINKS = [
+  { en: "CUSTOM ORDER", href: "/contact" },
+  { en: "CONTACT", href: "/contact" },
+  { en: "SHIPPING & RETURNS", href: "/about" },
+  { en: "TERMS & CONDITIONS", href: "/about" },
+];
+
+// Minimal luxury footer: links (left) · wordmark (center) · social (right),
+// with a centered copyright bar beneath.
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="mt-24 border-t border-border/60 bg-secondary/40">
-      <div className="section grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="space-y-3">
-          <p className="font-serif text-2xl font-semibold">{siteConfig.name}</p>
-          <p className="max-w-xs text-sm text-muted-foreground">
-            {siteConfig.description}
-          </p>
-        </div>
-
-        <div>
-          <h3 className="mb-4 text-sm font-semibold">پیوندها</h3>
-          <ul className="space-y-2.5 text-sm text-muted-foreground">
-            {siteConfig.nav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="hover:text-primary">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="mb-4 text-sm font-semibold">تماس</h3>
-          <ul className="space-y-2.5 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-primary" />
-              <a href={`tel:${siteConfig.phoneE164}`} className="hover:text-primary">
-                {siteConfig.phone}
-              </a>
+    <footer className="border-t border-border bg-background">
+      <div className="section grid grid-cols-1 items-center gap-8 py-14 md:grid-cols-3">
+        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-start">
+          {LINKS.map((l) => (
+            <li key={l.en}>
+              <Link
+                href={l.href}
+                className="font-latin text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-opacity hover:opacity-60"
+              >
+                {l.en}
+              </Link>
             </li>
-            <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-primary" />
-              <a href={`mailto:${siteConfig.email}`} className="hover:text-primary">
-                {siteConfig.email}
-              </a>
-            </li>
-            <li className="flex items-start gap-2">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-              <span>{siteConfig.address}</span>
-            </li>
-          </ul>
-        </div>
+          ))}
+        </ul>
 
-        <div>
-          <h3 className="mb-4 text-sm font-semibold">ساعات کاری</h3>
-          <p className="text-sm text-muted-foreground">{siteConfig.hours}</p>
+        <Link href="/" className="text-center leading-none" aria-label="KAYA">
+          <span className="block font-display text-2xl font-semibold tracking-[0.3em] text-foreground">
+            KAYA
+          </span>
+          <span className="mt-1 block font-latin text-[9px] uppercase tracking-[0.5em] text-muted-foreground">
+            Floral Studio
+          </span>
+        </Link>
+
+        <div className="flex items-center justify-center gap-6 md:justify-end">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noreferrer"
+            className="font-latin text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-opacity hover:opacity-60"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://pinterest.com"
+            target="_blank"
+            rel="noreferrer"
+            className="font-latin text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-opacity hover:opacity-60"
+          >
+            Pinterest
+          </a>
         </div>
       </div>
 
-      <div className="border-t border-border/60">
-        <div className="section flex flex-col items-center justify-between gap-2 py-5 text-xs text-muted-foreground sm:flex-row">
-          <p>
-            © {toPersianDigits(new Date().getFullYear())} {siteConfig.name} — تمامی
-            حقوق محفوظ است.
-          </p>
-          <p>
-            <Link href="/admin" className="hover:text-primary">
-              مدیریت
-            </Link>
-          </p>
-        </div>
+      <div className="border-t border-border">
+        <p className="section py-5 text-center font-latin text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          © {year} Kaya Floral Studio. All Rights Reserved.
+        </p>
       </div>
     </footer>
   );
