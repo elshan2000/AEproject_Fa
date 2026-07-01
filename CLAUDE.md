@@ -227,3 +227,58 @@ Files:
 - `slugify()` preserves `؀-ۿ` range for Persian slugs. Use `slugifyWithFallback()` in services (never returns empty string).
 - `next.config.ts` has `dangerouslyAllowSVG: true` for placeholder product SVGs.
 - The `productQuerySchema` uses field name `category` (the URL param) but maps it to `categorySlug` when calling `listProducts()`.
+
+---
+
+## React Native mobile app — IN PROGRESS (branch `reactNative`)
+
+Rebuilding the storefront + admin dashboard as a native app (Android + iOS) in **`/mobile`**, using Expo, that consumes this Next.js app's REST API. This section is the durable record of the plan/progress — the ephemeral Claude Code plan file used to design it lives only on the machine that created it, so **this section is the source of truth when resuming on a different machine.** When the user says "continue [the mobile app / from my home pc]", re-read this whole section first, then check `git log`/`git status` and the actual state of `/mobile` before writing any code — don't trust this doc blindly if it disagrees with what's on disk.
+
+### Decisions already made (do not re-litigate)
+- Scope: storefront **and** admin dashboard (not storefront-only).
+- Toolchain: **Expo** managed workflow (user is on Linux, no Mac — Expo Go / EAS Build is how iOS gets tested/built without owning a Mac).
+- Location: `/mobile` in this repo, on the `reactNative` branch.
+- Admin auth: bearer-token JWT (added to the existing backend — see below), not cookie-based, since native apps can't use the web's HttpOnly cookie flow.
+
+### Backend changes already made (in `/src`, done and typechecked)
+1. `src/lib/auth.ts` — `getSession()` now also checks an `Authorization: Bearer <token>` header (via `headers()` from `next/headers`) as a fallback when there's no session cookie, verified with the existing `verifySessionToken()`. Every route using `requireAdmin()` (products/categories CRUD, inquiries GET, upload) transparently supports bearer tokens now — no per-route changes needed.
+2. `src/app/api/auth/login/route.ts` — response is now `{ user, token }` (previously just `{ user }`). Cookie is still set for the web. Mobile stores `token`.
+3. New `src/app/api/admin/stats/route.ts` (`GET`, admin-only) — `{ productCount, categoryCount, featuredCount, inquiryCount }`. The web dashboard queries Prisma directly server-side; mobile needed this over HTTP instead.
+4. No CORS changes needed (native `fetch` isn't subject to browser CORS).
+
+### Mobile scaffold status
+- Created via `npx create-expo-app@latest mobile` — **this pulled Expo SDK 57** (React Native 0.86, React 19.2), which is newer than common training-data knowledge. The template itself ships an `AGENTS.md`/`CLAUDE.md` saying "Expo HAS CHANGED, read https://docs.expo.dev/versions/v57.0.0/ before writing code" — **heed that** if anything below looks off vs. what you expect from older Expo versions. Routes live under `mobile/src/app` (not root `app/`), alias `@/*` → `mobile/src/*` (see `mobile/tsconfig.json`).
+- **`mobile/.npmrc`** pins `registry=https://registry.npmjs.org/`, scoped to this subproject only. Reason: this machine's global npm registry (`/usr/etc/npmrc`, a private mirror at `registry.buluttakin.com`) intermittently 404'd on fresh Expo packages. Do **not** touch the global registry config — only this project-local override.
+- NativeWind (Tailwind for RN) configured: `mobile/tailwind.config.js` (brand colors converted from the web's `globals.css` HSL vars to hex — primary muted rose `#ae425d`, warm background `#fdfcfc`, etc.), `babel.config.js`, `metro.config.js` (`withNativeWind`), `mobile/src/global.css` (tailwind directives + kept template's font CSS vars), `nativewind-env.d.ts`.
+- `app.json` updated: name `"کایا"`, slug `kaya-mobile`, scheme `kaya`, `web.bundler: "metro"`, RTL via `extra: { supportsRTL: true, forcesRTL: true }` + `"expo-localization"` plugin (static config approach — works in Expo Go without a manual `I18nManager`/reload dance, per current Expo docs).
+- Fonts: `@expo-google-fonts/vazirmatn` installed (npm-published font package, avoids needing to source `.ttf` binaries manually) + `expo-font`. Not yet wired into a `useFonts()` call in the root layout.
+- Other installed deps: `@tanstack/react-query`, `react-hook-form` + `@hookform/resolvers` + `zod`, `expo-secure-store` (admin token storage), `expo-image-picker` (product image upload), `lucide-react-native` + `react-native-svg` (icon parity with web's `lucide-react`).
+- **Cross-repo sharing decision:** the small, framework-agnostic pieces (Zod validation schemas, DTOs, site config, Persian formatting helpers) are **duplicated** into `mobile/src/lib/`, not imported across from `/src` — avoids fragile Metro cross-directory config. Only actual data comes live over HTTP.
+- Written so far: `mobile/src/lib/types.ts` (DTOs), `mobile/src/lib/site.ts` (site config). **Not yet written**, still needed:
+  - `mobile/src/lib/format.ts` — `formatPrice`, `toPersianDigits`, `formatDate`, `slugify` (port from `src/lib/utils.ts`; watch for the Hermes/Intl `fa-IR` + Jalali-calendar gotcha noted below).
+  - `mobile/src/lib/validations/{product,category,inquiry,auth}.ts` — port Zod schemas verbatim from `src/lib/validations/*` (same field limits/regex/Persian messages — see "Validation schema rules" above).
+  - `mobile/src/lib/api-client.ts` — fetch wrapper: base URL from `EXPO_PUBLIC_API_URL` env var, JSON handling, attaches `Authorization: Bearer <token>` when present, typed errors matching the API's `{error, details}` shape (`ApiErrorBody` type already in `types.ts`).
+  - `mobile/src/lib/auth-storage.ts` (expo-secure-store get/set/clear token), `mobile/src/lib/auth-context.tsx` (token state + login/logout, gates admin routes), `mobile/src/lib/query-client.ts`.
+  - `mobile/src/hooks/{use-products,use-categories,use-inquiries,use-admin-stats,use-auth}.ts` — react-query hooks over the api-client.
+  - `mobile/src/components/{shop,admin,ui}/*` — see the full component-by-component parity list captured during planning (ProductCard, ProductGrid, ProductsFilters, Pagination, ContactForm, WhatsAppButton, Hero, FeaturedProducts, CategorySection, EmptyState, SectionHeading for shop; ProductForm, ImageUpload, LoginForm, CategoryManager, StatCard, DeleteProductButton/ConfirmDialog, PageHeader for admin; Button/TextInput/Card/Select/Checkbox/Badge as RN `ui/` primitives replacing shadcn).
+  - `mobile/src/app/(shop)/*` and `mobile/src/app/admin/*` route screens (Expo Router) — see the "Feature parity map" below.
+  - Template boilerplate still present and **should be deleted/replaced** as real screens land: `mobile/src/app/{index,explore}.tsx`, `mobile/src/components/{animated-icon*,app-tabs*,external-link,hint-row,web-badge,themed-text,themed-view}.tsx`, `mobile/src/hooks/{use-color-scheme*,use-theme}.ts`, `mobile/src/constants/theme.ts` (the app is light-theme-only, Persian-only — no dark mode / locale switcher needed, mirroring the web app).
+
+### Feature parity map (what each screen must do)
+**Storefront** (public, no auth) — `GET /api/products` (page/pageSize/category/search/sort), `GET /api/products/[idOrSlug]`, `GET /api/categories`, `POST /api/inquiries`: home, product listing (debounced search + category filter + sort + pagination), product detail + related products, about, contact (pre-filled from a product via a slug param), WhatsApp (`wa.me/{phoneE164}`) / `tel:` deep links.
+
+**Admin** (bearer-token gated) — same read routes plus `POST/PUT/DELETE /api/products/[id]`, `POST/PUT/DELETE /api/categories/[id]`, `GET /api/inquiries`, `POST /api/admin/upload` (multipart field name **must stay `file`**, 4MB limit, jpeg/png/webp/avif/svg only, returns `{url}`), `GET /api/admin/stats` (new), `POST /api/auth/login` (now returns `{user, token}`): login, dashboard stats + recent inquiries, product list/create/edit/delete (image picker → multipart upload), category manager (add/rename/delete), inquiries feed.
+
+Every screen must reuse the exact validation rules already in `src/lib/validations/*` (product name 2–120 chars, price >0 and ≤100M, inquiry phone regex `^[0-9+\-\s()]+$`, etc.) — no new business rules invented.
+
+### Known risks to verify while building (not blocking)
+- **Hermes `Intl` + `fa-IR` + Jalali calendar**: verify on-device that `Intl.DateTimeFormat("fa-IR")` actually outputs Jalali dates under Expo SDK 57's Hermes. If not, fall back to a small JS Jalali-conversion helper for `formatDate` only.
+- **iOS without a Mac**: Expo Go for iterative dev; EAS Build (cloud) for a real installable/TestFlight build.
+- Both `/` (web) and `/mobile` need `npm install` run independently after a fresh clone — they are two separate `node_modules` trees, not a workspace/monorepo.
+
+### Delivery order / current position
+1. ✅ Backend bearer-token + stats route (done, typechecked).
+2. 🚧 Scaffold `/mobile` (Expo Router + NativeWind + fonts/RTL + theme + api-client + duplicated validations/types) — **in progress, paused here** (see "Not yet written" list above).
+3. ⬜ Storefront screens end-to-end against the real API.
+4. ⬜ Admin auth + admin screens end-to-end.
+5. ⬜ Verify: `npm run typecheck` (web), run the Expo app and exercise both storefront and admin flows against the local dev server (`npm run dev` in `/`) — note: nobody has run the Expo dev server / tested on a simulator or device yet, this is unverified beyond `npm install` succeeding and the config files being written.

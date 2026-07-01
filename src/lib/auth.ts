@@ -1,5 +1,5 @@
 import "server-only";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { env } from "@/lib/env";
 import {
   SESSION_COOKIE,
@@ -42,12 +42,21 @@ export async function clearSessionCookie(): Promise<void> {
   cookieStore.delete(SESSION_COOKIE);
 }
 
-/** Read & verify the current session from the request cookies. */
+/**
+ * Read & verify the current session from the request cookie, falling back to
+ * an `Authorization: Bearer <token>` header. The header path lets the native
+ * (React Native) admin app authenticate without cookies.
+ */
 export async function getSession(): Promise<SessionUser | null> {
   const cookieStore = await cookies();
-  const token = cookieStore.get(SESSION_COOKIE)?.value;
-  if (!token) return null;
-  return verifySessionToken(token);
+  const cookieToken = cookieStore.get(SESSION_COOKIE)?.value;
+  if (cookieToken) return verifySessionToken(cookieToken);
+
+  const headerList = await headers();
+  const authHeader = headerList.get("authorization");
+  const bearerToken = authHeader?.match(/^Bearer\s+(.+)$/i)?.[1];
+  if (!bearerToken) return null;
+  return verifySessionToken(bearerToken);
 }
 
 /** Convenience: sign a token for `user` and set the cookie. */
